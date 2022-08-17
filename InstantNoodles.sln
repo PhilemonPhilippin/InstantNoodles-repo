@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantNoodles.MVC", "InstantNoodles.MVC\InstantNoodles.MVC.csproj", "{AD1C89A0-468B-4C35-A075-868FF2DA0E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantNoodles.MVC", "InstantNoodles.MVC\InstantNoodles.MVC.csproj", "{AD1C89A0-468B-4C35-A075-868FF2DA0E89}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "InstantNoodles.DB", "InstantNoodles.DB\InstantNoodles.DB.sqlproj", "{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{AD1C89A0-468B-4C35-A075-868FF2DA0E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD1C89A0-468B-4C35-A075-868FF2DA0E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD1C89A0-468B-4C35-A075-868FF2DA0E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1839F0D-6AAD-49F2-84A6-C6898CC9D870}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
