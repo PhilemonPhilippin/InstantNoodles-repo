@@ -1,0 +1,13 @@
+﻿@using Noodle = InstantNoodles.DAL.Models.NoodleModel;
+
+@model List<Noodle>;
+
+<h1>My noodles</h1>
+
+@foreach (Noodle noodle in Model)
+{
+    <p> Name = @noodle.Name </p>
+    <p> Meat = @noodle.Meat </p>
+    <p> Vegetable = @noodle.Vegetable </p>
+    <p> With Sauce = @noodle.Sauce </p>
+}
