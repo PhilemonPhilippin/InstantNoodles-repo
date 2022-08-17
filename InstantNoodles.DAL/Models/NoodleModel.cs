@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstantNoodles.DAL.Models;
 
-internal class NoodleModel
+public class NoodleModel
 {
     public int NoodleID { get; set; }
     public string Name { get; set; }
