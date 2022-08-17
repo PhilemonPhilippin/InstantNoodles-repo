@@ -1,7 +1,13 @@
+using InstantNoodles.DAL.DbAccess;
+using InstantNoodles.DAL.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddSingleton<INoodleData, NoodleData>();
 
 var app = builder.Build();
 
