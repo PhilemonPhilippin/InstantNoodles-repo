@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InstantNoodles.DAL.Data;
-public class NoodleData
+public class NoodleData : INoodleData
 {
 	private readonly ISqlDataAccess _db;
 
@@ -22,7 +22,7 @@ public class NoodleData
 	}
 	public async Task<NoodleModel?> GetNoodle(int id)
 	{
-		var results = await _db.LoadData<NoodleModel, dynamic>("PPSP_Get", new {NoodleID = id});
+		var results = await _db.LoadData<NoodleModel, dynamic>("PPSP_Get", new { NoodleID = id });
 		return results.FirstOrDefault();
 	}
 	public Task InsertNoodle(NoodleModel noodle)
