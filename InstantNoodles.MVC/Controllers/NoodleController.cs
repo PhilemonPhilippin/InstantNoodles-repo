@@ -12,10 +12,10 @@ public class NoodleController : Controller
     {
         _service = service;
     }
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
-        MapperConfiguration config = new MapperConfiguration(cfg => cfg.CreateMap<NoodleDAL, NoodleMVC>());
-        Mapper mapper = new Mapper(config);
+        Mapper mapper = CreateMapper<NoodleDAL, NoodleMVC>();
 
         IEnumerable<NoodleDAL> noodlesDAL = await _service.GetNoodles();
         List<NoodleMVC> noodles = new List<NoodleMVC>();
@@ -25,5 +25,41 @@ public class NoodleController : Controller
             noodles.Add(noodle);
         }
         return View(noodles);
+    }
+    [HttpGet]
+    public async Task<IActionResult> Details([FromRoute]int id)
+    {
+        Mapper mapper = CreateMapper<NoodleDAL?, NoodleMVC>();
+        NoodleDAL? noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+            return NotFound();
+        NoodleMVC noodle = mapper.Map<NoodleMVC>(noodleDAL);
+        return View(noodle);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        Mapper mapper = CreateMapper<NoodleDAL?, NoodleMVC>();
+        NoodleDAL? noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+            return NotFound();
+        NoodleMVC noodle = mapper.Map<NoodleMVC>(noodleDAL);
+        return View(noodle);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        Console.WriteLine("My id is : " + id);
+        await _service.DeleteNoodle(id);
+        return RedirectToAction(nameof(Index));
+    }
+
+    private Mapper CreateMapper<TSource, UDestination>()
+    {
+        MapperConfiguration config = new MapperConfiguration(cfg => cfg.CreateMap<TSource, UDestination>());
+        Mapper mapper = new Mapper(config);
+        return mapper;
     }
 }

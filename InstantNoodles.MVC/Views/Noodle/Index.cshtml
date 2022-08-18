@@ -1,14 +1,14 @@
 ﻿@using NoodleMVC = InstantNoodles.MVC.Models.NoodleModel;
 
-
 @model List<NoodleMVC>;
 
-<h1>My noodles</h1>
-
+<h1>Noodles list</h1>
+<ul>
 @foreach (NoodleMVC noodle in Model)
 {
-    <p> Name = @noodle.Name </p>
-    <p> Meat = @noodle.Meat </p>
-    <p> Vegetable = @noodle.Vegetable </p>
-    <p> With Sauce = @noodle.Sauce </p>
+    <li class="mt-3">Name = @noodle.Name </li>
+    <li>Meat = @noodle.Meat </li>
+    <a asp-action="Details" asp-route-id="@noodle.NoodleID">Details</a>
+    <a asp-action="Delete" asp-route-id="@noodle.NoodleID">Delete</a>
 }
+</ul>
