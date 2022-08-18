@@ -8,6 +8,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<INoodleData, NoodleData>();
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddSingleton<INoodleRepository, NoodleRepository>();
 
 var app = builder.Build();
 
