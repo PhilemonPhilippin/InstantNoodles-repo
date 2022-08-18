@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InstantNoodles.DAL.Data;
 using Microsoft.AspNetCore.Mvc;
+using InstantNoodles.MVC.Models;
 using NoodleDAL = InstantNoodles.DAL.Models.NoodleModel;
 using NoodleMVC = InstantNoodles.MVC.Models.NoodleModel;
 
@@ -29,12 +30,70 @@ public class NoodleController : Controller
     [HttpGet]
     public async Task<IActionResult> Details([FromRoute]int id)
     {
-        Mapper mapper = CreateMapper<NoodleDAL?, NoodleMVC>();
         NoodleDAL? noodleDAL = await _service.GetNoodle(id);
         if (noodleDAL is null)
             return NotFound();
+
+        Mapper mapper = CreateMapper<NoodleDAL?, NoodleMVC>();
         NoodleMVC noodle = mapper.Map<NoodleMVC>(noodleDAL);
         return View(noodle);
+    }
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        return View();
+    }
+    [HttpPost, ActionName("Create")]
+    public async Task<IActionResult> Create(NoodleFormModel noodleForm)
+    {
+        if (!ModelState.IsValid)
+            return View(noodleForm);
+
+        NoodleDAL noodle = new NoodleDAL()
+        {
+            NoodleID = 0,
+            Name = noodleForm.Name,
+            Meat = noodleForm.Meat,
+            Vegetable = noodleForm.Vegetable,
+            Sauce = noodleForm.Sauce
+        };
+        await _service.InsertNoodle(noodle);
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+
+        NoodleDAL? noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+            return NotFound();
+
+        NoodleFormModel noodleForm = new NoodleFormModel()
+        {
+            Name = noodleDAL.Name,
+            Meat = noodleDAL.Meat,
+            Vegetable = noodleDAL.Vegetable,
+            Sauce = noodleDAL.Sauce
+        };
+        return View(noodleForm);
+    }
+    [HttpPost, ActionName("Edit")]
+    public async Task<IActionResult> Edit(int id, NoodleFormModel noodleForm)
+    {
+        if (!ModelState.IsValid)
+            return View(noodleForm);
+
+        NoodleDAL noodle = new NoodleDAL()
+        {
+            NoodleID = id,
+            Name = noodleForm.Name,
+            Meat = noodleForm.Meat,
+            Vegetable = noodleForm.Vegetable,
+            Sauce = noodleForm.Sauce
+        };
+        await _service.UpdateNoodle(noodle);
+        return RedirectToAction(nameof(Index));
     }
 
     [HttpGet]

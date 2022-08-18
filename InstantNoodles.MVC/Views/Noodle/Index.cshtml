@@ -3,6 +3,8 @@
 @model List<NoodleMVC>;
 
 <h1>Noodles list</h1>
+<a asp-action="Create">Create new noodle recipe</a>
+
 <ul>
 @foreach (NoodleMVC noodle in Model)
 {
@@ -10,5 +12,7 @@
     <li>Meat = @noodle.Meat </li>
     <a asp-action="Details" asp-route-id="@noodle.NoodleID">Details</a>
     <a asp-action="Delete" asp-route-id="@noodle.NoodleID">Delete</a>
+    <a asp-action="Edit" asp-route-id="@noodle.NoodleID">Edit</a>
+
 }
 </ul>
