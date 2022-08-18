@@ -1,15 +1,13 @@
-﻿@using NoodleMVC = InstantNoodles.MVC.Models.NoodleModel;
-
-@model List<NoodleMVC>;
+﻿@model List<DifferentNoodleModel>;
 
 <h1>Noodles List</h1>
 
 <ul>
-@foreach (NoodleMVC noodle in @Model)
+    @foreach (DifferentNoodleModel noodle in @Model)
 {
-    <li>Name : @noodle.Name</li>
-    <li>Meat : @noodle.Meat</li>
-    <li>Vegetable : @noodle.Vegetable</li>
+    <li>Name : @noodle.Nom</li>
+    <li>Meat : @noodle.Viande</li>
+    <li>Vegetable : @noodle.Legume</li>
     <li>With sauce : @noodle.Sauce</li>
 }
 </ul>
