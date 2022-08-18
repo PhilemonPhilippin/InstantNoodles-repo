@@ -10,6 +10,7 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<INoodleData, NoodleData>();
 builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddSingleton<INoodleRepository, NoodleRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

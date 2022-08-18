@@ -1,11 +1,11 @@
-﻿@using NoodleDAL = InstantNoodles.DAL.Models.NoodleModel;
+﻿@using NoodleMVC = InstantNoodles.MVC.Models.NoodleModel;
 
-@model List<NoodleDAL>;
+@model List<NoodleMVC>;
 
 <h1>Noodles List</h1>
 
 <ul>
-@foreach (NoodleDAL noodle in @Model)
+@foreach (NoodleMVC noodle in @Model)
 {
     <li>Name : @noodle.Name</li>
     <li>Meat : @noodle.Meat</li>
