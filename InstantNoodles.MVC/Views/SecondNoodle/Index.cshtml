@@ -2,12 +2,13 @@
 
 <h1>Noodles List</h1>
 
-<ul>
+
     @foreach (DifferentNoodleModel noodle in @Model)
 {
+    <ul>
     <li>Name : @noodle.Nom</li>
     <li>Meat : @noodle.Viande</li>
     <li>Vegetable : @noodle.Legume</li>
     <li>With sauce : @noodle.Sauce</li>
+    </ul>
 }
-</ul>
