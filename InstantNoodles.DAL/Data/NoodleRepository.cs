@@ -66,4 +66,29 @@ public class NoodleRepository : INoodleRepository
 
 		return createdNoodle;
 	}
+
+	public async Task UpdateNoodle(int id, NoodleModel noodle)
+	{
+		var query = "UPDATE [Noodle] SET Name = @Name, Meat = @Meat, Vegetable = @Vegetable, Sauce = @Sauce WHERE NoodleID = @Id";
+
+		var parameters = new DynamicParameters();
+		parameters.Add("Id", id, DbType.Int32);
+		parameters.Add("Name", noodle.Name, DbType.String);
+        parameters.Add("Meat", noodle.Meat, DbType.String);
+        parameters.Add("Vegetable", noodle.Vegetable, DbType.String);
+        parameters.Add("Sauce", noodle.Sauce, DbType.Boolean);
+
+		using var connection = _context.CreateConnection();
+
+		await connection.ExecuteAsync(query, parameters);
+    }
+	
+	public async Task DeleteNoodle(int id)
+	{
+		var query = "DELETE FROM [Noodle] WHERE NoodleID = @Id";
+
+        using var connection = _context.CreateConnection();
+
+		await connection.ExecuteAsync(query, new { id });
+    }
 }

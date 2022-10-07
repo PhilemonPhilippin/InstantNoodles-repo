@@ -66,4 +66,65 @@ public class SecondNoodleController : Controller
         NoodleDAL createdNoodle = await _service.InsertNoodle(noodle);
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        NoodleDAL noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+        {
+            return NotFound();
+        }
+
+        DifferentNoodleModel noodleModel = _mapper.Map<DifferentNoodleModel>(noodleDAL);
+        return View(noodleModel);
+    }
+    [HttpPost]
+    [ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        await _service.DeleteNoodle(id);
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        NoodleDAL noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+        {
+            return NotFound();
+        }
+
+        DifferentNoodleFormModel noodleForm = new()
+        {
+            Nom = noodleDAL.Name,
+            Viande = noodleDAL.Meat,
+            Legume = noodleDAL.Vegetable,
+            Sauce = noodleDAL.Sauce
+        };
+
+        return View(noodleForm);
+    }
+    [HttpPost]
+    [ActionName("Edit")]
+    public async Task<IActionResult> EditConfirmed(int id, DifferentNoodleFormModel noodleForm)
+    {
+        if (ModelState.IsValid == false)
+        {
+            return View(noodleForm);
+        }
+
+        NoodleDAL noodle = new NoodleDAL()
+        {
+            NoodleID = id,
+            Name = noodleForm.Nom,
+            Meat = noodleForm.Viande,
+            Vegetable = noodleForm.Legume,
+            Sauce = noodleForm.Sauce
+        };
+
+        await _service.UpdateNoodle(id, noodle);
+        return RedirectToAction(nameof(Index));
+    }
 }

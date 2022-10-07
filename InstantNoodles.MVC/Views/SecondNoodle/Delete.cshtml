@@ -1,0 +1,9 @@
+﻿@model DifferentNoodleModel;
+
+<h1>Delete this Noodle ?</h1>
+<p>Name : @Model.Nom</p>
+<p>ID : @Model.IdNouille</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="IdNouille" />
+    <input type="submit" value="Delete" />
+</form>
