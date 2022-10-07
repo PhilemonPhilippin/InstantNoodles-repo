@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
 
 namespace InstantNoodles.DAL.Data;
 public class NoodleRepository : INoodleRepository
@@ -38,4 +39,31 @@ public class NoodleRepository : INoodleRepository
 		var noodle = await connection.QuerySingleOrDefaultAsync<NoodleModel>(query, new { id });
 		return noodle;
     }
+
+	public async Task<NoodleModel> InsertNoodle(NoodleModel noodle)
+	{
+		var query = "INSERT INTO [Noodle] (Name, Meat, Vegetable, Sauce) VALUES (@Name, @Meat, @Vegetable, @Sauce)" + 
+			"SELECT CAST(SCOPE_IDENTITY() as int)";
+
+		var parameters = new DynamicParameters();
+		parameters.Add("Name", noodle.Name, DbType.String);
+        parameters.Add("Meat", noodle.Meat, DbType.String);
+        parameters.Add("Vegetable", noodle.Vegetable, DbType.String);
+        parameters.Add("Sauce", noodle.Sauce, DbType.Boolean);
+
+		using var connection = _context.CreateConnection();
+
+		int id = await connection.QuerySingleAsync<int>(query, parameters);
+
+		var createdNoodle = new NoodleModel()
+		{
+			NoodleID = id,
+			Name = noodle.Name,
+			Meat = noodle.Meat,
+			Vegetable = noodle.Vegetable,
+			Sauce = noodle.Sauce,
+		};
+
+		return createdNoodle;
+	}
 }

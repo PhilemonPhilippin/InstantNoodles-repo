@@ -2,7 +2,6 @@
 using InstantNoodles.DAL.Data;
 using Microsoft.AspNetCore.Mvc;
 using NoodleDAL = InstantNoodles.DAL.Models.NoodleModel;
-using NoodleMVC = InstantNoodles.MVC.Models.NoodleModel;
 using InstantNoodles.MVC.Models;
 
 namespace InstantNoodles.MVC.Controllers;
@@ -39,5 +38,32 @@ public class SecondNoodleController : Controller
 
         DifferentNoodleModel noodle = _mapper.Map<DifferentNoodleModel>(noodleDAL);
         return View(noodle);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(DifferentNoodleFormModel differentNoodleForm)
+    {
+        if (ModelState.IsValid == false)
+        {
+            return View(differentNoodleForm);
+        }
+
+        NoodleDAL noodle = new NoodleDAL()
+        {
+            NoodleID = 0,
+            Name = differentNoodleForm.Nom,
+            Meat = differentNoodleForm.Viande,
+            Vegetable = differentNoodleForm.Legume,
+            Sauce = differentNoodleForm.Sauce
+        };
+
+        NoodleDAL createdNoodle = await _service.InsertNoodle(noodle);
+        return RedirectToAction(nameof(Index));
     }
 }

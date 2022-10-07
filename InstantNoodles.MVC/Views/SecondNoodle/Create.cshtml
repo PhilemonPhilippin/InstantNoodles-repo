@@ -1,0 +1,15 @@
+﻿@model DifferentNoodleFormModel;
+
+<h1>Create a noodle recipe</h1>
+
+<form asp-action="Create">
+    <label asp-for="Nom"></label>
+    <input type="text" asp-for="Nom" />
+    <label asp-for="Viande"></label>
+    <input type="text" asp-for="Viande" />
+    <label asp-for="Legume"></label>
+    <input type="text" asp-for="Legume" />
+    <label asp-for="Sauce"></label>
+    <input type="checkbox" asp-for="Sauce" />
+    <button type="submit">Create</button>
+</form>
