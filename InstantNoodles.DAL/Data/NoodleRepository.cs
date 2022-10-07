@@ -91,4 +91,14 @@ public class NoodleRepository : INoodleRepository
 
 		await connection.ExecuteAsync(query, new { id });
     }
+
+	public async Task<IEnumerable<NoodleModel>> GetNoSauceWithMushroomNoodles()
+	{
+		var procedureName = "PPSP_GetNoSauceWithMushroom";
+
+		using var connection = _context.CreateConnection();
+
+		var noodles = await connection.QueryAsync<NoodleModel>(procedureName, CommandType.StoredProcedure);
+		return noodles.ToList();
+	}
 }

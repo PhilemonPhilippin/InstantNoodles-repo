@@ -67,6 +67,7 @@
     <Build Include="StoredProcedures\PPSP_Delete.sql" />
     <Build Include="StoredProcedures\PPSP_Create.sql" />
     <Build Include="StoredProcedures\PPSP_Update.sql" />
+    <Build Include="StoredProcedures\PPSP_GetNoSauceWithMushroom.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Seed.sql" />

@@ -8,4 +8,5 @@ public interface INoodleRepository
     Task<NoodleModel> InsertNoodle(NoodleModel noodle);
     Task UpdateNoodle(int id, NoodleModel noodle);
     Task DeleteNoodle(int id);
+    Task<IEnumerable<NoodleModel>> GetNoSauceWithMushroomNoodles();
 }

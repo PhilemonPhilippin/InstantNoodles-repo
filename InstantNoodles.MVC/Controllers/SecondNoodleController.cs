@@ -127,4 +127,19 @@ public class SecondNoodleController : Controller
         await _service.UpdateNoodle(id, noodle);
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> NoSauceMushroomNoodles()
+    {
+        IEnumerable<NoodleDAL> noodlesDAL = await _service.GetNoSauceWithMushroomNoodles();
+
+        List<DifferentNoodleModel> noodles = new List<DifferentNoodleModel>();
+        foreach (NoodleDAL noodleDAL in noodlesDAL)
+        {
+            DifferentNoodleModel noodle = _mapper.Map<DifferentNoodleModel>(noodleDAL);
+            noodles.Add(noodle);
+        }
+
+        return View(noodles);
+    }
 }

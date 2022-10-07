@@ -1,0 +1,13 @@
+﻿@model List<DifferentNoodleModel>
+
+<h1>Noodles List with mushroom but no sauce</h1>
+
+@foreach (DifferentNoodleModel noodle in @Model)
+{
+     <ul>
+        <li>Nom : @noodle.Nom</li>
+        <li>Viande : @noodle.Viande</li>
+        <li>Légume : @noodle.Legume</li>
+        <li>Sauce : @noodle.Sauce</li>
+    </ul>
+}
