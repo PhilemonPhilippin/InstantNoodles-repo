@@ -20,7 +20,7 @@ public class NoodleRepository : INoodleRepository
 
 	public async Task<IEnumerable<NoodleModel>> GetNoodles()
 	{
-		string query = "SELECT * FROM [Noodle];";
+		string query = "SELECT * FROM [Noodle]";
 
 		using IDbConnection connection = _context.CreateConnection();
 
@@ -28,4 +28,14 @@ public class NoodleRepository : INoodleRepository
 		return noodles.ToList();
 
 	}
+
+	public async Task<NoodleModel> GetNoodle(int id)
+	{
+		string query = "SELECT * FROM [Noodle] WHERE NoodleID = @Id";
+
+        using IDbConnection connection = _context.CreateConnection();
+
+		var noodle = await connection.QuerySingleOrDefaultAsync<NoodleModel>(query, new { id });
+		return noodle;
+    }
 }

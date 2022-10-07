@@ -27,4 +27,17 @@ public class SecondNoodleController : Controller
         }
         return View(noodles);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Details([FromRoute]int id)
+    {
+        var noodleDAL = await _service.GetNoodle(id);
+        if (noodleDAL is null)
+        {
+            return NotFound();
+        }
+
+        DifferentNoodleModel noodle = _mapper.Map<DifferentNoodleModel>(noodleDAL);
+        return View(noodle);
+    }
 }
